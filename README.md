@@ -1,4 +1,4 @@
 javascript
 ==========
 
-js related usage
+js related projects
