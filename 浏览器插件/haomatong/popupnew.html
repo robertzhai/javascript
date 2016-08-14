@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html >
+<head> 
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" /> 
+<title>搜狗号码通查号</title>
+<link rel="stylesheet" type="text/css" href="layer.css" />
+<script type="text/javascript" src="jquery-1.6.3.min.js"></script>
+<script type="text/javascript" src="layer.js"></script>
+</head> 
+<body > 
+<div style="margin:6px;">
+<div class="phtrackvr">
+<h3>电话信息查询</h3>
+<div style="height: 25px;" id="numdiv">
+<span class="title">电话号码：</span><input id="input_num" type="text" class="vrinput" maxlength="20"  style="float: left; color: rgb(136, 136, 136);" value="输入电话号码进行查询"><span class="taobtn">
+<a href="#" class="taobtn_in"  style="color: #000;text-decoration: none" onclick="search_number();return false;" >查询</a>  </span>
+</div>
+<div class="pho_b" id="inputerror" style="display:none">
+<span class="numerror2">请输入有效的电话号码数字</span>
+</div>
+<div class="pho_b" id="noexistnumber" style="display:none">
+<span class="numerror2">抱歉,未找到该号码的相关信息</span>
+</div>
+<div class="p_con" id="numberbelongs" style="display:none;">
+<span class="hui6">归属地区：</span><span class="bold hui0" id="phonenumberdetail"></span><span class="hui9" id="sjzjoffer"  id="number_provider">(手机归属地数据由<a class="hui9" target="_blank" style="color: #999;" href="http://www.showji.com/" id="sogou_vr_10001001_sjzx_0">手机在线</a>提供)</span>
+</div>
+<div class="p_conx" id="phonenumberfrom" ><span class="hui6 floatl">电话用户：</span><p class="bold hui0 plpx" ><span class="chengse" id="number_mark" style="display:none;"></span><span class="hui9 fno" id="number_source" style="display:none;"> </span></p></div>
+<div class="pbox" id="sogouadvertise" >
+<img src="images/pbiao1.jpg" align="absmiddle">遇到奇怪电话？推荐使用<a target="_blank" href="http://haoma.sogou.com" id="sogou_vr_10001001_hmt_0">搜狗号码通</a>，独创陌生来电识别，第一时间告诉你来电号码身份。号码通还有“标记”功能，一人标记骚扰电话，千万用户同时受益。<img onclick="share_haomatong()" style="width:61px;height:16px;margin-bottom:0px" src="./images/weibo_big.jpg"/></div>
+</div> 
+</div>  
+  
+</body> 
+</html>

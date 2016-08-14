@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?> 
+ <extension> 
+ <id>com.sogou.haomatong.zhaishiwei</id> 
+ <name>搜狗号码通</name> 
+ <show_icon>true</show_icon> 
+ <description>搜狗号码通，陌生来电识别，祝你远离骚扰电话，全国电话轻松查</description> 
+ <popup page="popupnew.html" width="630" height="245"/>
+ <version>1.0.0.2</version>
+ <request_api_version>1</request_api_version>
+ <author>搜狗号码通</author>
+ </extension> 
