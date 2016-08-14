@@ -1,0 +1,214 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>桌跃怒放2013-短信活动</title>
+<style>
+	body {
+		background:url(bkgnd_game2.jpg) no-repeat left top;
+	}
+	.bigbtn{ 
+		position: absolute;
+		height:78px;
+		width:168px;
+		font-size:20px;
+		left: 812px;
+		top: 697px;
+		border: 1px solid;
+		cursor:pointer;
+	}
+	.main { 
+		overflow:auto;
+		font-family:微软雅黑;
+		font-size:18px;
+		border:#B5E61D 1px solid;
+		position: absolute;
+		text-align: center;
+		top: 185px;
+		left: 224px;
+		width: 547px;
+		height: 572px;
+	}
+	.smallfont {
+		font-family:微软雅黑;
+		font-size:15px;
+	} 
+	.btn {
+		display:none;
+		font-size:40px;
+		width:300px;
+		height:100px;
+	}
+	
+	.checked {
+		background:url(checked.png) no-repeat left top;
+	}
+	
+	.unchecked {
+		background:url(checked.png) no-repeat left top;
+	}
+	
+	.smstable {
+		position: absolute;
+		text-align: center;
+		top: 184px;
+		left: 220px;
+		width: 550px;
+		height: 577px;
+		font-family:微软雅黑; 
+		font-size:30px; 
+		margin:20px 5px 15px 140px;
+		color: red;
+	}
+	
+</style>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript">
+
+// 例子
+//http://sms.sogou-op.org/portal/gdsms/get_sms.php?tb=20121223%2012:01:02&st=0&ed=100&num=1069015943106666"
+
+// 这里是从什么时间开始取短信，正常应该是20130118%2017:00:00，即2013年1月18日下午5点
+var tb = "20121223%2012:01:02";
+
+// 短信号码
+var smsNum = "1069015943106666";
+
+// 取短信URL
+var Url = "http://sms.XXX-op.org/portal/gdsms/get_sms.php?";
+
+// 单页条数
+var MaxLine = 5;
+
+var countOneTime = 1;
+var countReceived = 0;
+var BeginTime;
+
+function Go()
+{
+	document.body.style.background = "url(bkgnd_game2.jpg) no-repeat left top";
+}
+
+function Start()
+{
+	Stop();
+	BeginTime = setInterval(GetSMS, 1000);
+}
+
+function Stop()
+{
+	if (BeginTime)
+	{
+		clearInterval(BeginTime);
+		BeginTime = null;
+	}
+}
+
+function GetSMS()
+{
+	var tmp= Url;
+	var data=[{null:"null"}];
+	var param = "tb=" + tb + "&st=" + countReceived + "&ed=" + (countReceived + countOneTime) + "&num=" + smsNum;
+	try
+	{
+		var oldE = document.getElementById("script_id");
+		if(oldE)
+		{
+			document.body.removeChild(oldE);
+		}
+		
+		var e = document.createElement("script");
+		e.id = "script_id";
+		e.type = 'text/javascript';
+		e.src = Url + param;
+		document.body.appendChild(e);
+	}
+	catch(e)
+	{
+//		alert(e);
+	}
+}
+
+function CallBack(data)
+{
+	if (data.length == 0)
+	{
+		setText("还没有信短信到来，同学们加油发哦");
+	}
+	
+	try
+	{
+		var j = eval(data);
+
+		countReceived += j.length;
+		var text = "";
+		$.each(j, function(i, val){	
+			text += revOneSMS(val.sms, val.num, val.time);
+		});
+		
+		setText(text);
+		if(countReceived >= MaxLine)
+		{
+			$("#more").fadeIn();
+			Stop();
+		}
+	}
+	catch(e)
+	{
+//		alert(e);
+	}
+}
+
+function revOneSMS(sms, num, time)
+{
+	var t = document.getElementById("sms_table");
+	
+	var newTr = t.insertRow();
+	var td2 = newTr.insertCell();
+	var td1 = newTr.insertCell();
+	var td0 = newTr.insertCell();
+	
+
+	td0.innerText = num;
+	td0.style.width = 176;
+	
+	td1.innerText = sms;
+	td1.style.width = 270;
+//	td2.innerHTML = '<div class="unchecked" onclick = "record(this, \'' + num + '__' + sms + '\');></div>';
+	td2.innerText = "QA都是好同志";
+
+	return;
+}
+
+function setText(t)
+{
+	$("#t").html(t);
+}
+
+function sms_callback(data)
+{
+	CallBack(data);
+}
+
+function record(self, text)
+{
+	alert(text);
+	if (self.className == 'unchecked') {
+		self.className = 'checked';
+	} else {
+		self.className = 'unchecked';	
+	}
+}
+
+</script>
+</head>
+
+<body onload="Start();">
+<table class='smstable' id='sms_table'></table>
+
+
+<div id='more' class="bigbtn" onclick="Start();"></div>
+</body>
+
+
+</html>

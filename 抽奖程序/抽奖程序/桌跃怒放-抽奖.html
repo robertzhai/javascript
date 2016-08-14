@@ -1,0 +1,133 @@
+<html>
+<head>
+<style>
+	body {
+		background:url(img/bkgnd_award3.jpg) no-repeat left top;
+	}
+	
+	.bigbtn{ 
+		position: absolute;
+		height:78px;
+		width:168px;
+		font-size:20px;
+		cursor:pointer;
+	}
+	#lucky_guy{ 
+		position: absolute;
+		text-align: center;
+		top: 293px;
+		left: 328px;
+		width: 423px;
+		height: 200px;
+		font-family:微软雅黑; 
+		font-size:64px; 
+		margin:20px 5px 15px 140px;
+		font-weight: bold;
+		color: red;
+	}
+	
+	.awardbtn{
+		position: absolute; 
+		cursor:pointer;
+		top: 700px;
+	}
+	
+</style>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>桌跃怒放2013-抽奖</title>
+<script type="text/javascript" src="img/jquery.js"></script>
+<script type="text/javascript">
+
+var AllPerson = new Array;
+var randTimer;
+var curIndex;
+
+$(document).ready(function(){
+	
+	//数组创建与添加
+	AllPerson = 
+	[
+	
+		{"name":"robert001<br/>"},
+		{"name":"robert002<br/>"},
+		{"name":"robert003<br/>"},
+		
+	];
+});
+
+Array.prototype.remove = function (dx) {  
+    if (isNaN(dx) || dx > this.length) {  
+        return false;  
+    }  
+    for (var i = 0, n = 0; i < this.length; i++) {  
+        if (this[i] != this[dx]) {  
+            this[n++] = this[i];  
+        }  
+    }  
+    this.length -= 1;  
+};  
+
+function setLuckyName(name)
+{
+	$('#lucky_guy').html(name);
+}
+
+function setLucky(i)
+{
+	setLuckyName(AllPerson[i].name);
+}
+
+function randPerson()
+{
+	curIndex = parseInt(Math.random() * (AllPerson.length));
+	setLucky(curIndex);
+}
+
+function Begin()
+{
+	if(AllPerson.length == 0)
+	{
+		setLuckyName('贵公司真有钱，所有人都中过奖啦^_^<br>温馨提示：重开页面可重新抽奖');
+	}
+	
+	if(randTimer)
+	{	
+		clearInterval(randTimer);
+	}
+	randTimer = setInterval(randPerson, 25);
+}
+
+function Stop()
+{
+	if(randTimer)
+	{
+		clearInterval(randTimer);
+	}
+
+	AllPerson.remove(curIndex);
+}
+
+function ChangeAward(award)
+{
+	document.body.style.background = "url(img/bkgnd_award" + award + ".jpg) no-repeat left top";
+}
+
+</script>
+</head>
+
+<body>
+<div id='lucky_guy'>Lucky Guy</div>
+	
+	
+<div id='control'>
+	<div class='bigbtn' onclick='Begin();' style="top: 567px; left: 488px;"><img src='img/start.png'/></div>
+	<div class='bigbtn' onclick='Stop();' style="top: 567px;left:703px;"><img src='img/stop.png'/></div>
+</div>
+
+<div class='awardbtn' onclick='ChangeAward(0);' style="left: 20px; "><img src='img/award0.png'/></div>
+<div class='awardbtn' onclick='ChangeAward(1);' style="left: 120px;"><img src='img/award1.png'/></div>
+<div class='awardbtn' onclick='ChangeAward(2);' style="left: 220px;"><img src='img/award2.png'/></div>
+<div class='awardbtn' onclick='ChangeAward(3);' style="left: 320px;"><img src='img/award3.png'/></div>
+
+</body>
+</html>
